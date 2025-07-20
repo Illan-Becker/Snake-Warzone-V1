@@ -1,0 +1,13 @@
+const WORLD_WIDTH = 4000;
+const WORLD_HEIGHT = 4000;
+const INITIAL_BOUNDARY_RADIUS = 2000; // Half of WORLD_WIDTH/HEIGHT for a centered circle
+const MIN_BOUNDARY_RADIUS = 200;
+const BOUNDARY_SHRINK_DURATION = 180000; // 180 seconds in milliseconds
+
+module.exports = {
+    WORLD_WIDTH,
+    WORLD_HEIGHT,
+    INITIAL_BOUNDARY_RADIUS,
+    MIN_BOUNDARY_RADIUS,
+    BOUNDARY_SHRINK_DURATION
+};
