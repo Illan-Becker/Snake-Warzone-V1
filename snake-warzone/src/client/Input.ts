@@ -1,12 +1,5 @@
 import Phaser from 'phaser';
 
-// Constants (embedded for simplicity due to module resolution issues)
-const WORLD_WIDTH = 4000;
-const WORLD_HEIGHT = 4000;
-const INITIAL_BOUNDARY_RADIUS = 2000; // Half of WORLD_WIDTH/HEIGHT for a centered circle
-const MIN_BOUNDARY_RADIUS = 200;
-const BOUNDARY_SHRINK_DURATION = 180000; // 180 seconds in milliseconds
-
 /**
  * @class Input
  * @description Handles user input for mobile virtual joystick and tap-to-boost controls.

@@ -1,11 +1,12 @@
 import Phaser from 'phaser';
-import { WORLD_WIDTH, WORLD_HEIGHT } from '../shared/Constants.js'; // Explicitly import .js
+import { WORLD_WIDTH, WORLD_HEIGHT } from '@shared/Constants'; // Explicitly import .js
 import { Snake } from './Snake';
 import { Boundary } from './Boundary';
 import { Net } from './Net';
 import { Input } from './Input'; // Import Input class
 import { AudioManager } from './Audio'; // Import AudioManager class
-import type { GameState, PlayerState } from '../shared/Types.js'; // Explicitly import .js
+import { Renderer } from './Renderer'; // Import Renderer class
+import type { GameState, PlayerState } from '@shared/Types'; // Explicitly import .js
 
 /**
  * @class Game
@@ -23,6 +24,7 @@ export class Game extends Phaser.Scene {
     private currentGameState: GameState | null = null; // Store the latest game state from the server
     private foodSprite!: Phaser.GameObjects.Rectangle; // New: Food sprite
     private foodPelletGraphics!: Phaser.GameObjects.Graphics; // New: Graphics for food pellets
+    private _renderer!: Renderer; // New: Renderer instance
     private powerUpSprites: Map<number, Phaser.GameObjects.Rectangle> = new Map(); // New: Power-up sprites
 
     /**
@@ -84,6 +86,9 @@ export class Game extends Phaser.Scene {
 
         // Initialize Audio Manager
         this.audioManager = new AudioManager(this);
+
+        // Initialize Renderer
+        this._renderer = new Renderer(this);
     }
 
     /**
@@ -92,12 +97,12 @@ export class Game extends Phaser.Scene {
      * @param {number} time - The current time.
      * @param {number} delta - The delta time since the last frame.
      */
-    update(time: number, delta: number) {
+    update(time: number, _delta: number) {
         // Update and draw boundary
         const currentRadius = this.boundary.getRadius(time);
         this.boundaryGraphics.clear();
-        this.boundaryGraphics.lineStyle(5, 0x00ffff, 1); // Cyan pulsing neon ring
-        this.boundaryGraphics.strokeCircle(this.boundary.x, this.boundary.y, currentRadius);
+        // Update boundary visuals using the Renderer
+        this._renderer.updateBoundaryVisuals(this.boundary.x, this.boundary.y, currentRadius, time);
 
         // Boundary collision detection
         const distanceToBoundaryCenter = Phaser.Math.Distance.Between(this.playerSnake.x, this.playerSnake.y, this.boundary.x, this.boundary.y);

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { WORLD_WIDTH, WORLD_HEIGHT } from '../shared/Constants.js';
+import { WORLD_WIDTH, WORLD_HEIGHT } from '@shared/Constants';
 
 /**
  * @class Snake
@@ -38,7 +38,7 @@ export class Snake extends Phaser.GameObjects.Sprite {
      * @param {number} delta - The delta time since the last frame.
      * @param {number} angle - The target angle for the snake in radians.
      */
-    update(time: number, delta: number, angle: number) {
+    update(_time: number, _delta: number, angle: number) {
         this.currentAngle = angle;
 
         // Calculate velocity based on angle
